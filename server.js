@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const api = require('./routes')
+const api = require('./routes/menuApi')
 
 const PORT = 3001
 
