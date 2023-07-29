@@ -8,9 +8,10 @@ const makeListNav = (itemName) => {
     itemListNav.appendChild(newItem)
 }
 
-const makeListEl = (itemName, price, imgName) => {
+const makeListEl = (itemName, price, imgName, itemId) => {
     const newItem = document.createElement('div')
     newItem.setAttribute('id', itemName)
+    newItem.dataset.itemId = itemId
 
     const hEl = document.createElement('h4')
     hEl.textContent = itemName
@@ -26,3 +27,22 @@ const makeListEl = (itemName, price, imgName) => {
     newItem.appendChild(imgEl)
     itemListEl.appendChild(newItem)
 }
+
+const getItems = () => {
+    fetch('/api/menus', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+    }).then((response) => response.json)
+    .then(function (data){
+        for(let i = 0; i < data.length; i++){
+            const {menuName, price, img, id} = data[i]
+            makeListEl(menuName, price, img, id)
+            makeListNav(menuName)
+        }
+    })
+}
+
+getItems()
+
