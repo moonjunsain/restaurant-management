@@ -11,7 +11,7 @@ menuForm.addEventListener('submit', (e) => {
     formData.append('price', price)
     formData.append('imgFile', imgFile)
 
-    fetch('/menus', {
+    fetch('/api/menus', {
         method: 'POST',
         body: formData
     }).then((response) => {

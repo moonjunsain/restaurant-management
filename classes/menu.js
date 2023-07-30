@@ -4,7 +4,7 @@ class Menu {
         this.menuName = menuName
         this.price = price
         this.img = img
-        this.id = uuid.v4()
+        this.id = uuid()
     }
 }
 

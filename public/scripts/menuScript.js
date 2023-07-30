@@ -4,7 +4,9 @@ const itemListEl = document.getElementById('listItems')
 const makeListNav = (itemName) => {
     const newItem = document.createElement('a')
     newItem.classList.add('nav-link')
+    newItem.classList.add('active')
     newItem.setAttribute('href', `#${itemName}`)
+    newItem.textContent = itemName
     itemListNav.appendChild(newItem)
 }
 
@@ -20,7 +22,7 @@ const makeListEl = (itemName, price, imgName, itemId) => {
     pEl.textContent = '$ ' + price
 
     const imgEl = document.createElement('img')
-    imgEl.src = '../../db/images/' + imgName
+    imgEl.src = './images/' + imgName
 
     newItem.appendChild(hEl)
     newItem.appendChild(pEl)
@@ -34,13 +36,15 @@ const getItems = () => {
         headers: {
             'Content-Type': 'application/json',
           },
-    }).then((response) => response.json)
+    }).then((response) => response.json())
     .then(function (data){
         for(let i = 0; i < data.length; i++){
             const {menuName, price, img, id} = data[i]
             makeListEl(menuName, price, img, id)
             makeListNav(menuName)
         }
+    }).catch(err => {
+        console.log("Error", err)
     })
 }
 
